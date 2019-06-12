@@ -8,7 +8,7 @@ const createFakeUser = () => ({
   password: faker.internet.password()
 });
 
-exports.seed = async function(knex, Promise) {
+exports.seed = function(knex, Promise) {
   const fakeUsers = [];
 
   for (let i = 0; i < 100; i++) {
@@ -22,5 +22,5 @@ exports.seed = async function(knex, Promise) {
     user.department = "placeholder department";
   });
 
-  return await knex("users").insert(fakeUsers);
+  return knex("users").insert(fakeUsers);
 };
