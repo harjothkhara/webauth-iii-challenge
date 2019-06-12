@@ -2,13 +2,15 @@
 const express = require('express');
 const helmet = require('helmet');
 
+const authRouter = require('../routers/authRouter.js');
+
 const server = express() //initialize server
 
 //middleware speaking to server
 server.use(helmet());
 server.use(express.json());
 
-//API
+server.use('/auth', authRouter);
 
 //testing server
 server.get('/', (req, res) => {
