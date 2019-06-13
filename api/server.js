@@ -11,6 +11,7 @@ const server = express() //initialize server
 server.use(helmet());
 server.use(express.json());
 
+// using routers
 server.use('/api/auth', authRouter);
 server.use('/api/users', userRouter);
 

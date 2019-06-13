@@ -29,8 +29,11 @@ router.post('/login', async (req, res) => {
         try {
             const user = await db.findByUser(username);
             if (user && bcrypt.compareSync(password, user.password)) {
+                // Using tokens, we need to manually generate and send token as part of response 
+               // We'll write the function below 
                 const token = generateToken(user.id, user.department);
                 res.status(200).json({ message: `Welcome ${username}!`, token });
+                // After token generated, we have to add to response
             } else {
                 res.status(401).json({ message: "You shall not pass!" });
             }
@@ -39,8 +42,9 @@ router.post('/login', async (req, res) => {
         }
     }
 });
-
+// Writing the function that generates our token 
 function generateToken(id, department) {
+    // Defining payload, containing claims (info) for token 
     const payload = {
         id,
         department
@@ -48,6 +52,7 @@ function generateToken(id, department) {
     const options = {
         expiresIn: "1d"
     };
+    // Grabs the secret from .env to verify token 
     return jwt.sign(payload, secret, options)
 }
 
