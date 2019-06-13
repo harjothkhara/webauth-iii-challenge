@@ -11,7 +11,7 @@ const server = express() //initialize server
 server.use(helmet());
 server.use(express.json());
 
-server.use('/auth', authRouter);
+server.use('/api/auth', authRouter);
 server.use('/api/users', userRouter);
 
 //testing server
