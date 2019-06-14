@@ -1,10 +1,13 @@
 import React from 'react';
 import axios from "axios";
+// Importing withRouter to redirect upon register
+import { withRouter } from 'react-router-dom'; 
 
-class Login extends React.Component {
+class SignUp extends React.Component {
     state = {
-        username: 'han',
-        password: 'solo'
+        username: '',
+        password: '',
+        department: ''
     };
 
     render() {
@@ -30,6 +33,15 @@ class Login extends React.Component {
                         type="password"
                      />
                 </div>
+                <div>
+                <label htmlFor='department' />
+                    <input 
+                        id='department' 
+                        onChange={this.handleChange} 
+                        value={this.state.department} 
+                        type="text"
+                     />
+                </div>
             <div>
                 <button type="submit">Login</button>
             </div>
@@ -46,7 +58,7 @@ class Login extends React.Component {
     
     submitForm = event => {
         event.preventDefault();
-        const endpoint = 'http://localhost:5000/api/auth/login';
+        const endpoint = 'http://localhost:5000/api/auth/register';
 
         axios
           .post(endpoint, this.state)
@@ -60,4 +72,4 @@ class Login extends React.Component {
     };
 }
 
-export default Login;
+export default withRouter(SignUp);
